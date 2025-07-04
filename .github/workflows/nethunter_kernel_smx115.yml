@@ -27,14 +27,15 @@ jobs:
           android-version: 12
           aosp-clang-version: r383902
 
-          # NetHunter features (patching disabled due to 5.10 kernel)
+          # NetHunter features (LXC enabled, but patching disabled to avoid 5.10 conflicts)
           lxc: true
+          lxc-patch: false      # optional, can test true later
           nethunter: true
-             # ✅ Disabled to avoid patch conflict
+          nethunter-patch: false
 
           # Optimization
-          
-          disable-lto: true
+          ccache: true
+          disable-lto: false
 
           # Packaging and release
           anykernel3: true
