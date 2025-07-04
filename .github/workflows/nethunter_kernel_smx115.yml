@@ -1,0 +1,27 @@
+name: Build NetHunter Kernel for SM-X115
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/Anmol6002/kernel_source_sm-x115
+          kernel-branch: main
+          config: gta9_defconfig
+          arch: arm64
+          android-version: true
+          aosp-gcc: true
+          aosp-clang: true
+          aosp-clang-version: r383902
+          nethunter: true             # ✅ Enable 
+          nethunter-patch: true        # ✅NetHunter kernel configs
+          anykernel3: true             # ✅ Package into a flashable zip
+          release: true                # ✅ Optional: auto-publish to Releases
+          access-token: ${{ secrets.GITHUB_TOKEN }}
