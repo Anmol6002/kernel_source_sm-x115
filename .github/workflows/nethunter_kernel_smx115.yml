@@ -1,43 +1,45 @@
-name: Build NetHunter Kernel
+# Build NetHunter Kernel for SM-X115
+name: Build Nethunter Kernel SM-X115
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-kernel:
-    name: Build Kernel
+  Build-Kernel:
+    strategy:
+      fail-fast: false
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
-      - name: Checkout this repo
-        uses: actions/checkout@v3
-
-      - name: Build with dabao1955's Kernel Builder
+      - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          # Kernel source
           kernel-url: https://github.com/Anmol6002/kernel_source_sm-x115
           kernel-branch: main
           config: gta9_defconfig
           arch: arm64
+          android-version: 12
 
           # Toolchains
           aosp-gcc: true
           aosp-clang: true
-          android-version: 12
           aosp-clang-version: r383902
 
-          # NetHunter features (LXC enabled, but patching disabled to avoid 5.10 conflicts)
+          # KernelSU and NetHunter options
+          ksu: false                # Disable KernelSU unless you're testing it
           lxc: true
-          lxc-patch: false      # optional, can test true later
+          lxc-patch: false         # Disabled because you're on kernel 5.10
           nethunter: true
-          nethunter-patch: false
+          nethunter-patch: false   # Disable patch for 4.14; you're using 5.10
 
-          # Optimization
+          # Optimization & stability
+          disable-lto: true
           ccache: true
-          disable-lto: false
+          extra-cmd: CCACHE=ccache   # ✅ Fix the permission error
 
-          # Packaging and release
+          # Output zip
           anykernel3: true
           release: true
           access-token: ${{ secrets.GITHUB_TOKEN }}
