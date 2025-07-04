@@ -18,6 +18,7 @@ jobs:
         with:
           kernel-url: https://github.com/Anmol6002/kernel_source_sm-x115
           kernel-branch: main
+          kernel-dir: kernel
           config: gta9_defconfig
           arch: arm64
           android-version: 12
@@ -37,9 +38,9 @@ jobs:
           disable-lto: true
           
           extra-cmd: |
-              mkdir -p kernel/kernel-5.10/
-              touch kernel/kernel-5.10/abi_symbollist.raw
-              CCACHE=ccache
+           export CCACHE=ccache
+           mkdir -p out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/
+           touch out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
             
           # Output zip
           anykernel3: true
