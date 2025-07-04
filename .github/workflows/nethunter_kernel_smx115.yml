@@ -22,7 +22,7 @@ jobs:
           arch: arm64
 
           # Toolchains
-          aosp-gcc: true
+          aosp-gcc: false
           aosp-clang: true
           android-version: 14
           aosp-clang-version: r450784e
