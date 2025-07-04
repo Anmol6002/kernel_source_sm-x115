@@ -39,9 +39,10 @@ jobs:
           
           extra-cmd: |
            export CCACHE=ccache
-           mkdir -p out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/
-           touch out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
-            
+           extra-cmd: |
+            export CCACHE=ccache
+            mkdir -p out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/
+            echo '# dummy abi symbol list' > out/target/product/gta9/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
           # Output zip
           anykernel3: true
           release: true
