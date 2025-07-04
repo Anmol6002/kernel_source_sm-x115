@@ -36,8 +36,11 @@ jobs:
           # Optimization & stability
           disable-lto: true
           
-          extra-cmd: CCACHE=ccache   # ✅ Fix the permission error
-
+          extra-cmd: |
+            export CCACHE=ccache
+            mkdir -p kernel/kernel-5.10/
+            touch kernel/kernel-5.10/abi_symbollist.raw
+            
           # Output zip
           anykernel3: true
           release: true
