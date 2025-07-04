@@ -29,9 +29,8 @@ jobs:
 
           # NetHunter features (patching disabled due to 5.10 kernel)
           lxc: true
-          lxc-patch: true
           nethunter: true
-          nethunter-patch: false   # ✅ Disabled to avoid patch conflict
+             # ✅ Disabled to avoid patch conflict
 
           # Optimization
           ccache: true
